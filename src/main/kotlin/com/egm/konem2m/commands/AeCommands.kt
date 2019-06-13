@@ -17,7 +17,7 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
 
 class AeCreateCommands : CliktCommand(name = "ae-create") {
     private val apiName by argument(help = "api name")
-    private val aeResourceName by argument(help = "name of the application entity")
+    private val aeName by argument(help = "Name of the application entity to create")
     private val acpi by argument(help = "ACP identifier")
 
     private val config by requireObject<Map<String, String>>()
@@ -28,7 +28,7 @@ class AeCreateCommands : CliktCommand(name = "ae-create") {
                 "m2m:ae": {
 	                "api": "$apiName",
                     "rr": "true",
-                    "rn": "$aeResourceName",
+                    "rn": "$aeName",
                     "acpi": ["$acpi"]
                 }
             }
@@ -51,7 +51,7 @@ class AeCreateCommands : CliktCommand(name = "ae-create") {
         when (result) {
             is Result.Success -> {
                 val aeLocation = response.header("Content-Location").first()
-                println("AE $aeResourceName successfully created under $aeLocation".green())
+                println("AE $aeName successfully created under $aeLocation".green())
             }
             is Result.Failure -> {
                 println(result.error.localizedMessage + " - " + response.body().asString("application/json").lightRed())
