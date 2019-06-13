@@ -1,0 +1,16 @@
+konem2m
+*~
+.#*
+*#
+.gradletasknamecache
+.DS_Store
+/application.yml
+/application.properties
+build/
+.gradle/*
+
+# IDEA artifacts and output dirs
+*.iml
+*.ipr
+*.iws
+.idea/*
