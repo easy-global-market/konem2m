@@ -6,18 +6,18 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import java.lang.reflect.Type
 
-data class ListAeReponse(val uris: List<String>)
+data class ListResourceReponse(val uris: List<String>)
 
-class ListAeResponseDeserializer : JsonDeserializer<ListAeReponse> {
+class ListResourceResponseDeserializer : JsonDeserializer<ListResourceReponse> {
     override fun deserialize(
         jsonElement: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): ListAeReponse {
+    ): ListResourceReponse {
         val json = jsonElement as JsonObject
         val jsonUris = json.get("m2m:uril").asJsonArray
         val uris = jsonUris.map { uri -> uri.asString }
 
-        return ListAeReponse(uris)
+        return ListResourceReponse(uris)
     }
 }

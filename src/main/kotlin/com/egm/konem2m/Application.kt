@@ -7,6 +7,6 @@ fun main(args: Array<String>) {
     KOneM2M().subcommands(
         AcpCreateCommands(),
         AeCreateCommands(), AeListCommands(), AeShowCommands(),
-        CntCreateCommands()
+        CntCreateCommands(), CntListCommands(), CntShowCommands()
     ).main(args)
 }

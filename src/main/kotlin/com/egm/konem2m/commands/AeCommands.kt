@@ -77,10 +77,10 @@ class AeListCommands : CliktCommand(name = "ae-list") {
         }
 
         val gson = GsonBuilder()
-            .registerTypeAdapter(ListAeReponse::class.java, ListAeResponseDeserializer())
+            .registerTypeAdapter(ListResourceReponse::class.java, ListResourceResponseDeserializer())
             .create()
 
-        val listAeResponse = gson.fromJson<ListAeReponse>(String(result.get()), ListAeReponse::class.java)
+        val listAeResponse = gson.fromJson<ListResourceReponse>(String(result.get()), ListResourceReponse::class.java)
 
         val table = AsciiTable()
         table.addRule()
