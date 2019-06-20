@@ -3,8 +3,7 @@ package com.egm.konem2m.utils
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.streams.asSequence
 
-// FIXME
-const val cseUrl = "http://127.0.0.1:7579/Mobius"
+const val cseBase = "/Mobius"
 
 private val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 

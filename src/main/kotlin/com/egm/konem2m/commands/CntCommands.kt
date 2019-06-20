@@ -4,7 +4,7 @@ import com.andreapivetta.kolor.green
 import com.andreapivetta.kolor.lightRed
 import com.egm.konem2m.model.ListResourceReponse
 import com.egm.konem2m.model.ListResourceResponseDeserializer
-import com.egm.konem2m.utils.cseUrl
+import com.egm.konem2m.utils.cseBase
 import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.requireObject
@@ -32,7 +32,7 @@ class CntCreateCommands : CliktCommand(name = "cnt-create") {
 	        }
         """.trimIndent()
 
-        val url = "$cseUrl/$aeName"
+        val url = config["HOST"].plus(cseBase).plus("/").plus(aeName)
         val (request, response, result) = url
             .httpPost()
             .body(payload)
@@ -63,7 +63,7 @@ class CntListCommands : CliktCommand(name = "cnt-list") {
     private val config by requireObject<Map<String, String>>()
 
     override fun run() {
-        val (request, response, result) = cseUrl
+        val (request, response, result) = config["HOST"].plus(cseBase)
             .httpGet(listOf("ty" to "3", "fu" to "1"))
             .header(mapOf("X-M2M-Origin" to "admin:admin",
                 "Content-Type" to "application/json;ty=3",
@@ -107,7 +107,7 @@ class CntShowCommands : CliktCommand(name = "cnt-show") {
     private val config by requireObject<Map<String, String>>()
 
     override fun run() {
-        val url = cseUrl + "/" + cntLocation.substringAfter("/")
+        val url = config["HOST"].plus(cseBase) + "/" + cntLocation.substringAfter("/")
         val (request, response, result) = url
             .httpGet()
             .header(mapOf("X-M2M-Origin" to origin,

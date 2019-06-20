@@ -3,7 +3,7 @@ package com.egm.konem2m.commands
 import com.andreapivetta.kolor.green
 import com.andreapivetta.kolor.lightRed
 import com.egm.konem2m.model.*
-import com.egm.konem2m.utils.cseUrl
+import com.egm.konem2m.utils.cseBase
 import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.requireObject
@@ -34,7 +34,7 @@ class AeCreateCommands : CliktCommand(name = "ae-create") {
             }
         """.trimIndent()
 
-        val (request, response, result) = cseUrl
+        val (request, response, result) = config["HOST"].plus(cseBase)
             .httpPost()
             .body(payload)
             .header(mapOf("X-M2M-Origin" to "",
@@ -64,7 +64,7 @@ class AeListCommands : CliktCommand(name = "ae-list") {
     private val config by requireObject<Map<String, String>>()
 
     override fun run() {
-        val (request, response, result) = cseUrl
+        val (request, response, result) = config["HOST"].plus(cseBase)
             .httpGet(listOf("ty" to "2", "fu" to "1"))
             .header(mapOf("X-M2M-Origin" to "admin:admin",
                 "Content-Type" to "application/json;ty=2",
@@ -101,7 +101,7 @@ class AeShowCommands : CliktCommand(name = "ae-show") {
     private val config by requireObject<Map<String, String>>()
 
     override fun run() {
-        val url = cseUrl + "/" + aeLocation.substringAfterLast("/")
+        val url = config["HOST"].plus(cseBase) + "/" + aeLocation.substringAfterLast("/")
         val (request, response, result) = url
             .httpGet()
             .header(mapOf("X-M2M-Origin" to origin,
