@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
         AcpCreateCommands(),
         AeCreateCommands(), AeListCommands(), AeShowCommands(),
         CntCreateCommands(), CntListCommands(), CntShowCommands(),
-        CiCreateCommands(), CiLastCommands()
+        CiCreateCommands(), CiLastCommands(),
+        SubCreateCommands()
     ).main(args)
 }
