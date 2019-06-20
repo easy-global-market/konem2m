@@ -50,7 +50,7 @@ class CntCreateCommands : CliktCommand(name = "cnt-create") {
         when (result) {
             is Result.Success -> {
                 val cntLocation = response.header("Content-Location").first()
-                println("AE $cntName successfully created under $cntLocation".green())
+                println("CNT $cntName successfully created under $cntLocation".green())
             }
             is Result.Failure -> {
                 println(result.error.localizedMessage + " - " + response.body().asString("application/json").lightRed())
