@@ -36,7 +36,7 @@ class AeCreateCommands : CliktCommand(name = "ae-create") {
         val (request, response, result) = config["HOST"].plus(config["CSEBASE"])
             .httpPost()
             .body(payload)
-            .header(mapOf("X-M2M-Origin" to "",
+            .header(mapOf("X-M2M-Origin" to "C",
                 "Content-Type" to "application/json;ty=2",
                 "X-M2M-RI" to "ae-create-${generateRI()}"))
             .response()
