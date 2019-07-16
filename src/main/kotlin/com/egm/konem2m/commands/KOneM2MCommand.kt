@@ -10,9 +10,11 @@ class KOneM2M : CliktCommand() {
     private val verbose by option("--verbose", "-v", help = "display full traces of request and response").flag(default = false)
     private val config by findObject { mutableMapOf<String, String>() }
     private val host by option(envvar = "MOBIUS_HOST").default("http://127.0.0.1:7579")
+    private val cseBase by option(envvar = "MOBIUS_CSEBASE").default("/Mobius")
 
     override fun run() {
         config["VERBOSE"] = if (verbose) "on" else "off"
         config["HOST"] = host
+        config["CSEBASE"] = cseBase
     }
 }

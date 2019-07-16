@@ -2,7 +2,6 @@ package com.egm.konem2m.commands
 
 import com.andreapivetta.kolor.green
 import com.andreapivetta.kolor.lightRed
-import com.egm.konem2m.utils.cseBase
 import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.requireObject
@@ -32,7 +31,7 @@ class SubCreateCommands : CliktCommand(name = "sub-create") {
 		        }
 	        }""".trimIndent()
 
-        val url = config["HOST"].plus(cseBase).plus("/").plus(cntName)
+        val url = config["HOST"].plus(config["CSEBASE"]).plus("/").plus(cntName)
         val (request, response, result) = url
             .httpPost()
             .body(payload)

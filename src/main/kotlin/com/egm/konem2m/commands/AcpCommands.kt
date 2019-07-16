@@ -7,7 +7,6 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.types.int
 import com.google.gson.GsonBuilder
 import com.egm.konem2m.model.*
-import com.egm.konem2m.utils.cseBase
 import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.requireObject
 import com.github.kittinunf.fuel.httpPost
@@ -40,7 +39,7 @@ class AcpCreateCommands : CliktCommand(name = "acp-create") {
             }}
         """.trimIndent()
 
-        val (request, response, result) = config["HOST"].plus(cseBase)
+        val (request, response, result) = config["HOST"].plus(config["CSEBASE"])
             .httpPost()
             .body(payload)
             .header(mapOf("X-M2M-Origin" to "admin:admin",

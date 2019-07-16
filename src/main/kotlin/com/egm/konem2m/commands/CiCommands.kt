@@ -4,7 +4,6 @@ import com.andreapivetta.kolor.green
 import com.andreapivetta.kolor.lightRed
 import com.egm.konem2m.model.LastCiResponse
 import com.egm.konem2m.model.LastCiResponseDeserializer
-import com.egm.konem2m.utils.cseBase
 import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.requireObject
@@ -30,7 +29,7 @@ class CiCreateCommands : CliktCommand(name = "ci-create") {
 	        }
         """.trimIndent()
 
-        val url = config["HOST"].plus(cseBase).plus("/").plus(cntName)
+        val url = config["HOST"].plus(config["CSEBASE"]).plus("/").plus(cntName)
         val (request, response, result) = url
             .httpPost()
             .body(payload)
@@ -65,7 +64,7 @@ class CiLastCommands : CliktCommand(name = "ci-last") {
     private val config by requireObject<Map<String, String>>()
 
     override fun run() {
-        val url = config["HOST"].plus(cseBase) + "/" + ciLocation.substringAfter("/") + "/latest"
+        val url = config["HOST"].plus(config["CSEBASE"]) + "/" + ciLocation.substringAfter("/") + "/latest"
         val (request, response, result) = url
             .httpGet()
             .header(mapOf("X-M2M-Origin" to origin,

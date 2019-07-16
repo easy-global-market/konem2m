@@ -8,6 +8,13 @@ Largely inspired by this [blog post](https://dev.to/viniciusccarvalho/building-a
 ./konem2m --help
 ```
 
+# Configuration
+
+The following environment variables are availabe :
+
+* `MOBIUS_HOST` : Mobius host (defaults to 127.0.0.1:7579)
+* `MOBIUS_CSEBASE` : Mobius CSE Base (defaults to "/Mobius")
+
 # Samples
 
 ## Create a ACP
