@@ -173,5 +173,5 @@ Build the project :
 Build a native image :
 
 ```
-~/tools/graalvm-ce-19.0.0/bin/native-image --report-unsupported-elements-at-runtime -jar build/libs/koneM2M-1.0-SNAPSHOT.jar konem2m -H:EnableURLProtocols=http --no-server
+~/tools/graalvm-ce-19.0.0/bin/native-image --report-unsupported-elements-at-runtime -jar build/libs/koneM2M-1.0-SNAPSHOT.jar konem2m -H:EnableURLProtocols=http -H:EnableURLProtocols=https --no-server
 ```
