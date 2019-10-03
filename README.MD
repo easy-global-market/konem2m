@@ -138,6 +138,21 @@ Sample response :
 CI Mobius/AE-Test/SensorTemperature/4-20190620142116190783742 successfully created under AE-Test/SensorTemperature
 ```
 
+## Create indefinitely new CIs under a CNT
+
+```
+./konem2m ci-create Cegm AE-Test/SensorTemperature 42 --repeat-interval=1000 --min-value=20 --max-value=78
+```
+
+Sample response :
+
+```text
+CI Mobius/AE-Test/SensorTemperature/4-20191003045907129039109 with value 62.428228554923884 created under AE-Test/SensorTemperature
+CI Mobius/AE-Test/SensorTemperature/4-20191003045908241520146 with value 49.02076602933088 created under AE-Test/SensorTemperature
+CI Mobius/AE-Test/SensorTemperature/4-20191003045909291899061 with value 76.0406875224163 created under AE-Test/SensorTemperature
+CI Mobius/AE-Test/SensorTemperature/4-20191003045910344814291 with value 32.475910975859904 created under AE-Test/SensorTemperature
+```
+
 ## Get last value of a CI
 
 ```
