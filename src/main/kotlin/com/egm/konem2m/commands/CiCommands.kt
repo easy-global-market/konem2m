@@ -22,6 +22,8 @@ class CiCreateCommands : CliktCommand(name = "ci-create") {
     private val origin by argument(help = "Originator of the request (prefixed with 'C' for CSEs or 'S' for AEs)")
     private val cntName by argument(help = "Name of the container in which to create the content instance")
     private val value by argument(help = "Value to create").double()
+    private val type by argument(help = "Type of the measure (eg CO2)")
+    private val unit by argument(help = "Unit of the value (eg ppm)")
     private val repeatInterval: Long by option(help = "Time to wait before sending a new measure").long().default(-1)
     private val minValue: Double by option(help = "Minimal value for a new measure").double().default(0.0)
     private val maxValue: Double by option(help = "Maximal value for a new measure").double().default(100.0)
@@ -31,17 +33,17 @@ class CiCreateCommands : CliktCommand(name = "ci-create") {
     override fun run() {
 
         if (repeatInterval == -1L)
-            sendNewCi(value)
+            sendNewCi(listOf(value, type, unit).joinToString(separator = ";"))
         else {
             while (true) {
                 val newValue = ThreadLocalRandom.current().nextDouble(minValue, maxValue)
-                sendNewCi(newValue)
+                sendNewCi(listOf(newValue, type, unit).joinToString(separator = ";"))
                 Thread.sleep(repeatInterval)
             }
         }
     }
 
-    private fun sendNewCi(value: Double) {
+    private fun sendNewCi(value: String) {
         val payload = """
             {
 	            "m2m:cin": {

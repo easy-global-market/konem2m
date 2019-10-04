@@ -129,19 +129,19 @@ Sample response :
 ## Create a CI
 
 ```
-./konem2m ci-create Cegm AE-Test/SensorTemperature 42
+./konem2m ci-create Cegm AE-Test/SensorTemperature 42 Temperature T°
 ```
 
 Sample response :
 
 ```text
-CI Mobius/AE-Test/SensorTemperature/4-20190620142116190783742 successfully created under AE-Test/SensorTemperature
+CI Mobius/AE-Test/SensorTemperature/4-20190620142116190783742 with value 42;Temperature;T° successfully created under AE-Test/SensorTemperature
 ```
 
 ## Create indefinitely new CIs under a CNT
 
 ```
-./konem2m ci-create Cegm AE-Test/SensorTemperature 42 --repeat-interval=1000 --min-value=20 --max-value=78
+./konem2m ci-create Cegm AE-Test/SensorTemperature 42 Temperature T° --repeat-interval=1000 --min-value=20 --max-value=78
 ```
 
 Sample response :
