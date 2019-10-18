@@ -143,7 +143,7 @@ class CntDeleteCommands : CliktCommand(name = "cnt-delete") {
         val (request, response, result) = url
             .httpDelete()
             .header(mapOf("X-M2M-Origin" to origin,
-                "X-M2M-RI" to "cnt-show-${generateRI()}"))
+                "X-M2M-RI" to "cnt-delete-${generateRI()}"))
             .response()
 
         if (config["VERBOSE"] == "on") {
