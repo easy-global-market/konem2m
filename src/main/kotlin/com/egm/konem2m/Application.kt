@@ -9,6 +9,6 @@ fun main(args: Array<String>) {
         AeCreateCommands(), AeListCommands(), AeShowCommands(),
         CntCreateCommands(), CntListCommands(), CntShowCommands(), CntDeleteCommands(),
         CiCreateCommands(), CiLastCommands(),
-        SubCreateCommands()
+        SubCreateCommands(), SubDeleteCommands()
     ).main(args)
 }
