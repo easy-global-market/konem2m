@@ -8,6 +8,7 @@ import com.egm.konem2m.utils.generateRI
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.requireObject
 import com.github.ajalt.clikt.parameters.arguments.argument
+import com.github.kittinunf.fuel.httpDelete
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.result.Result
@@ -109,6 +110,38 @@ class CntShowCommands : CliktCommand(name = "cnt-show") {
         val url = config["HOST"].plus(config["CSEBASE"]) + "/" + cntLocation.substringAfter("/")
         val (request, response, result) = url
             .httpGet()
+            .header(mapOf("X-M2M-Origin" to origin,
+                "X-M2M-RI" to "cnt-show-${generateRI()}"))
+            .response()
+
+        if (config["VERBOSE"] == "on") {
+            println(request)
+            println(response)
+        }
+
+        when (result) {
+            is Result.Success -> {
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val jsonResult = gson.fromJson<Any>(String(result.get()), Any::class.java)
+                println(jsonResult)
+            }
+            is Result.Failure -> {
+                println(result.error.localizedMessage + " - " + response.body().asString("application/json").lightRed())
+            }
+        }
+    }
+}
+
+class CntDeleteCommands : CliktCommand(name = "cnt-delete") {
+    private val origin by argument(help = "Originator of the request (prefixed with 'C' for CSEs or 'S' for AEs)")
+    private val cntLocation by argument(help = "Location of the CNT to delete")
+
+    private val config by requireObject<Map<String, String>>()
+
+    override fun run() {
+        val url = config["HOST"].plus(config["CSEBASE"]) + "/" + cntLocation
+        val (request, response, result) = url
+            .httpDelete()
             .header(mapOf("X-M2M-Origin" to origin,
                 "X-M2M-RI" to "cnt-show-${generateRI()}"))
             .response()

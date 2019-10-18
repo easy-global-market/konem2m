@@ -126,6 +126,18 @@ Sample response :
 {m2m:cnt={pi=1oXrLz_I0x, ri=hs7iqeuE57, ty=3.0, ct=20190620T141602, st=0.0, rn=SensorTemperature, lt=20190620T141602, et=20220620T141602, cr=Cegm, mni=3.1536E9, mbs=3.1536E9, mia=3.1536E7, cni=0.0, cbs=0.0}}
 ```
 
+## Delete a CNT
+
+```
+./konem2m cnt-delete Cegm AE-Test/SensorTemperature
+```
+
+Sample response :
+
+```text
+{"m2m:cnt":{"pi":"CB2401PF9fX","ri":"Rxfc5iggQP","ty":3,"ct":"20191018T081537","st":0,"rn":"CO2","lt":"20191018T081537","et":"20221018T081537","cr":"CEtsiIotWeek","mni":3153600000,"mbs":3153600000,"mia":31536000,"cni":0,"cbs":0}}
+```
+
 ## Create a CI
 
 ```
