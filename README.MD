@@ -191,14 +191,36 @@ Sub SubTemp successfully created under Mobius/AE-Test/SensorTemperature/SubTemp
 
 # Building
 
-Build the project :
+## Build the project
 
 ```
 ./gradlew build
 ```
 
-Build a native image :
+## Build a native image
+
+* Install GraalVM : https://www.graalvm.org/docs/getting-started/
+* Install native-image tool
 
 ```
-~/tools/graalvm-ce-19.0.0/bin/native-image --report-unsupported-elements-at-runtime -jar build/libs/koneM2M-1.0-SNAPSHOT.jar konem2m -H:EnableURLProtocols=http -H:EnableURLProtocols=https --no-server
+gu install native-image
+```
+
+* Set the paths
+
+```
+export PATH=~/tools/graalvm-ce-19.2.1/bin:$PATH
+export JAVA_HOME=~/tools/graalvm-ce-19.2.1
+```
+
+* Build the project
+
+```
+./gradlew clean build
+```
+
+* Build the native image
+
+```
+native-image --report-unsupported-elements-at-runtime -jar build/libs/koneM2M-<version>.jar konem2m -H:Name=konem2m -H:+ReportUnsupportedElementsAtRuntime -H:EnableURLProtocols=http,https --no-server --enable-all-security-services -H:+JNI -J-Djava.library.path=~/tools/graalvm-ce-19.2.1/jre/lib/amd64
 ```
